@@ -3,11 +3,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { MongooseModule } from '@nestjs/mongoose';
-import { UserSchema } from './schemas/users.schema';
+import { MongooseModule, MongooseModuleOptions } from '@nestjs/mongoose';
+import { UserSchema } from './models/users.models';
+import { DatabaseModule } from './database/database.module';
+
 
 @Module({
-  imports: [AuthModule, UsersModule, MongooseModule.forRoot('mongo://127.0.0.1:27017/Steviggio_db'), MongooseModule.forFeature([{name: "User", schema: UserSchema}])],
+  imports: [AuthModule, UsersModule, DatabaseModule],
   controllers: [AppController],
   providers: [AppService],
 })

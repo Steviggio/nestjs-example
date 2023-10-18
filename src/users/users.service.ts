@@ -1,30 +1,24 @@
 // users.service.ts
 import { Injectable } from '@nestjs/common';
-import { Model } from 'mongoose';
+import { User } from '../models/users.models';
 import { InjectModel } from '@nestjs/mongoose';
-import { User, UserDocument } from '../schemas/users.schema';
+import { Model } from 'mongoose';
+import * as bcrypt from "bcrypt";
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+  constructor(@InjectModel("User") private readonly userModel: Model<User>) { }
 
-  async findAll(): Promise<User[]> {
-    return this.userModel.find().exec();
+
+  async createUser(email: string, password: string, role: string): Promise<User> {
+    const user = new this.userModel({ email, password, role });
+    return user.save();
   }
 
-  async findOne(id: string): Promise<User> {
-    return this.userModel.findById(id).exec();
-  }
-
-  async create(user: User): Promise<User> {
-    return this.userModel.create(user);
-  }
-
-  async update(id: string, user: User): Promise<User> {
-    return this.userModel.findByIdAndUpdate(id, user, { new: true }).exec();
-  }
-
-  async remove(id: string): Promise<User> {
-    return this.userModel.findByIdAndRemove(id).exec();
+  async findUserByEmail(email: string): Promise<User> {
+    return this.userModel.findOne({ email }).exec();
   }
 }
+
+
+
