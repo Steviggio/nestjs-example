@@ -1,7 +1,7 @@
-import { Users } from './users';
+import { User } from './users.interface';
 
 describe('Users', () => {
   it('should be defined', () => {
-    expect(new Users()).toBeDefined();
+    expect(new User()).toBeDefined();
   });
 });
