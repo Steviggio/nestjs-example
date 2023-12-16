@@ -1,24 +1,25 @@
-// users.service.ts
 import { Injectable } from '@nestjs/common';
-import { User } from '../models/users.models';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-
+import { User } from './users.model';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel("User") private readonly userModel: Model<User>) { }
-
-
-  async createUser(email: string, password: string, role: string): Promise<User> {
-    const user = new this.userModel({ email, password, role });
-    return user.save();
+  constructor(@InjectModel("user") private readonly userModel: Model<User>) { }
+  async insertUser(eMail: string, password: string) {
+    const email = eMail.toLowerCase();
+    const newUser = new this.userModel({
+      email,
+      password,
+    });
+    await newUser.save();
+    return newUser;
   }
 
-  async findUserByEmail(email: string): Promise<User> {
-    return this.userModel.findOne({ email }).exec();
-  }
+  // async getUser(eMail: string) {
+  //   const email = eMail.toLowerCase();
+  //   const user = await this.userModel.findOne({ email });
+  //   return user;
+  // }
+
 }
-
-
-

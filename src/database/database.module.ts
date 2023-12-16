@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
+// import { MongooseModule } from '@nestjs/mongoose';
+import { databaseProviders } from './database.providers';
+
 
 @Module({
-  imports: [
-    MongooseModule.forRoot("mongodb://127.0.0.1:27017/Steviggio_db"),
-  ],
+  providers: [...databaseProviders],
+  exports: [...databaseProviders],
 })
-export class DatabaseModule {}
+export class DatabaseModule { }
