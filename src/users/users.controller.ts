@@ -21,7 +21,7 @@ export class UsersController {
     return {
       msg: "User successfully registered",
       userId: result.id,
-      eMail: result.email,
+      email: result.email,
     }
   }
 
