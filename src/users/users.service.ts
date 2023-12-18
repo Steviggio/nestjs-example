@@ -16,10 +16,10 @@ export class UsersService {
     return newUser;
   }
 
-  // async getUser(eMail: string) {
-  //   const email = eMail.toLowerCase();
-  //   const user = await this.userModel.findOne({ email });
-  //   return user;
-  // }
+  async getUser(eMail: string) {
+    const email = eMail.toLowerCase();
+    const user = await this.userModel.findOne({ email });
+    return user;
+  }
 
 }
