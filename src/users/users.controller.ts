@@ -8,6 +8,7 @@ import { AuthenticatedGuard } from 'src/auth/authenticated.guard';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
+
   // Route users/signup
   @Post("signup")
   async addUser(
@@ -18,29 +19,38 @@ export class UsersController {
     const hashedPassword = await bcrypt.hash(userPassword, saltOrRounds);
     const result = await this.usersService.insertUser(
       eMail,
-      hashedPassword,
+      hashedPassword
     );
+
     return {
       msg: "User successfully registered",
       userId: result.id,
-      email: result.email,
-    }
+      eMail: result.email,
+    };
   }
 
   // Route users/login
   @UseGuards(LocalAuthGuard)
-  @Post('/login')
+  @Post('login')
   login(@Request() req): any {
     return {
       User: req.user,
       msg: 'User logged in'
     };
-  }
+  };
 
+  // Route users/protected
   @UseGuards(AuthenticatedGuard)
   @Get("protected")
-  getHello(@Request() req): any {
+  getHello(@Request() req): string {
     return req.user;
+  };
+
+  // Route users/logout
+  @Get("logout")
+  logout(@Request() req): any {
+    req.session.destroy();
+    return { msg: "The user session has ended." }
   }
 
 }
