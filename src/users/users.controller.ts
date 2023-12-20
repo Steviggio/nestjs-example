@@ -48,6 +48,7 @@ export class UsersController {
   };
 
   // Route users/logout
+  // @UseGuards(AuthenticatedGuard)
   @Get("/logout")
   logout(@Request() req): any {
     req.session.destroy();
