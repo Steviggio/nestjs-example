@@ -10,7 +10,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) { }
 
   // Route users/signup
-  @Post("signup")
+  @Post("/signup")
   async addUser(
     @Body("password") userPassword: string,
     @Body("email") eMail: string,
@@ -26,12 +26,13 @@ export class UsersController {
       msg: "User successfully registered",
       userId: result.id,
       eMail: result.email,
+      role: result.role
     };
   }
 
   // Route users/login
   @UseGuards(LocalAuthGuard)
-  @Post('login')
+  @Post('/login')
   login(@Request() req): any {
     return {
       User: req.user,
@@ -41,13 +42,13 @@ export class UsersController {
 
   // Route users/protected
   @UseGuards(AuthenticatedGuard)
-  @Get("protected")
+  @Get("/protected")
   getHello(@Request() req): string {
     return req.user;
   };
 
   // Route users/logout
-  @Get("logout")
+  @Get("/logout")
   logout(@Request() req): any {
     req.session.destroy();
     return { msg: "The user session has ended." }

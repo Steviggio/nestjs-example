@@ -1,13 +1,13 @@
-import * as mongoose from 'mongoose';
-import * as uniqueValidator from 'mongoose-unique-validator';
-import { Document, model } from 'mongoose';
-import { Prop, Schema } from '@nestjs/mongoose';
+// import * as mongoose from 'mongoose';
+// import * as uniqueValidator from 'mongoose-unique-validator';
+// import { Document, model } from 'mongoose';
+// import { Prop, Schema } from '@nestjs/mongoose';
 
-export interface User extends Document {
-  email: string;
-  password: string;
-  role: string;
-}
+// export interface User extends Document {
+//   email: string;
+//   password: string;
+//   role: string;
+// }
 
 // @Schema({ versionKey: false })
 // export class User {
@@ -21,25 +21,25 @@ export interface User extends Document {
 //   role: string;
 // }
 
-const usersSchema: mongoose.Schema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  role: {
-    type: String,
-    default: "user",
-    enum: ["user", "admin"]
-  }
-})
+// const usersSchema: mongoose.Schema = new mongoose.Schema({
+//   email: {
+//     type: String,
+//     required: true,
+//     unique: true
+//   },
+//   password: {
+//     type: String,
+//     required: true,
+//   },
+//   role: {
+//     type: String,
+//     default: "user",
+//     enum: ["user", "admin"]
+//   }
+// })
 
-usersSchema.plugin(uniqueValidator);;
-export const UserModel = mongoose.model<User>("User", usersSchema);
+// usersSchema.plugin(uniqueValidator);;
+// export const UserModel = mongoose.model<User>("User", usersSchema);
 
 // export const UserSchema = SchemaFactory.createForClass(UserSchema);
 // UserSchema.plugin(uniqueValidator);
