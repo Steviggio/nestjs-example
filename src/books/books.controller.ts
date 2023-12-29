@@ -14,27 +14,22 @@ import { BooksService } from './books.service';
 import { Book } from './books.model';
 import { AuthenticatedGuard } from 'src/auth/authenticated.guard';
 import { Request } from 'express';
+import { CreateBookDto } from './dto/create-book.dto';
 
 @Controller('books')
 export class BooksController {
   constructor(private readonly booksService: BooksService) { }
 
-  // @UseGuards(AuthenticatedGuard)
+  @UseGuards(AuthenticatedGuard)
   @Post("new")
-  async createBook(@Body() book: Partial<Book>, @Req() request: Request): Promise<any> {
+  @Post()
+  async create(@Body() createBookDto: CreateBookDto, @Req() req: Request): Promise<Book> {
+    const newBook = await this.booksService.create(createBookDto, req);
+    return newBook;
+  }
 
-    const user = request.user;
-    return user
-    // const user = request.user as {_id: string}
-    // const {_id} = user
-
-
-    // if (!_id) {
-
-    //   throw new UnauthorizedException("User is not authenticated or session has expired");
-    // }
-
-    // const newBook = await this.booksService.create(book, _id)
-    // return newBook
+  @Get()
+  async findAll(): Promise<Book[]> {
+    return this.booksService.findAll();
   }
 }
