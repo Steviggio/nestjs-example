@@ -1,5 +1,7 @@
+import { ObjectId } from "mongoose";
+
 export class CreateBookDto {
-  userId: string;
+  userId: ObjectId;
   title: string;
   author: string;
   imageUrl: string;
@@ -7,4 +9,9 @@ export class CreateBookDto {
   genre: string;
   ratings: { userId: string, grade: number }[];
   averageRating: number
+}
+
+export interface BookRating {
+  userId: ObjectId, 
+  grade: number
 }

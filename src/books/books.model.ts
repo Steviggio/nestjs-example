@@ -21,11 +21,11 @@ export interface Book extends mongoose.Document {
   imageUrl: string;
   year: number | string;
   genre: string;
-  ratings: BookRating[];
+  ratings: { userId: string, grade: number }[];
   averageRating: number;
 }
 
-export interface BookRating extends Document {
+export interface BookRating extends mongoose.Document {
   userId?: string;
-  grade?: string;
+  grade?: number;
 }
