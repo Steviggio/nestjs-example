@@ -39,18 +39,18 @@ export class BooksController {
     return this.booksService.findBookByID(_id);
   }
 
-  @UseGuards(AuthenticatedGuard)
-  @Post(":id/rating")
-  async rateABook(@Param("id") _id: string, @Body() rating: BookRating, @Req() req): Promise<BookRating> {
-    try {
-      rating.userId = req.user.userId;
-      return this.booksService.addRating(_id, rating);
-    } catch (error) {
-      console.error("Error in rateABook():", error);
-      throw new InternalServerErrorException("Failed to rate the book.", req.user.userId)
+  // @UseGuards(AuthenticatedGuard)
+  // @Post(":id/rating")
+  // async rateABook(@Param("id") _id: string, @Body() rating: BookRating, @Req() req): Promise<BookRating> {
+  //   try {
+  //     rating.userId = req.user.userId;
+  //     return this.booksService.addRating(_id, rating);
+  //   } catch (error) {
+  //     console.error("Error in rateABook():", error);
+  //     throw new InternalServerErrorException("Failed to rate the book.", req.user.userId)
 
-    }
-  }
+  //   }
+  // }
 
 
 }

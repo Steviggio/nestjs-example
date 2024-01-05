@@ -18,7 +18,6 @@
 - [ ] Log out from our session 
 
 
-
 ### Put Request :
 
 - [ ] Modify a book
@@ -34,4 +33,7 @@
 - [ ] Uniqueness of the mails stored in the MongoDB database
 
 
-### 
+### Middleware 
+
+- [ ] Integrate multer for file 
+- [X] Integrate passport for a session based system

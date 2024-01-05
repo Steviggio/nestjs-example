@@ -26,6 +26,6 @@ export interface Book extends mongoose.Document {
 }
 
 export interface BookRating extends mongoose.Document {
-  userId?: string;
+  userId: string;
   grade?: number;
 }
