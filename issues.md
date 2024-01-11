@@ -38,4 +38,7 @@
 - [ ] Integrate multer for file 
 - [X] Integrate passport for a session based system
 
-### Publishing the website online 
+### Publishing the website online via Nginx on an Ubuntu server 
+
+- [ ] Getting a droplet 
+- [ ] Configuring the Ubuntu server and securing the droplet with Certbot
