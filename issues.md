@@ -37,3 +37,5 @@
 
 - [ ] Integrate multer for file 
 - [X] Integrate passport for a session based system
+
+### Publishing the website online 
