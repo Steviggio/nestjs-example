@@ -8,7 +8,7 @@ export const BooksSchema = new mongoose.Schema({
   year: { type: Number, required: true },
   genre: { type: String, required: true },
   ratings: [{
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     grade: { type: Number, required: true, min: 0, max: 5 }
   }],
   averageRating: { type: Number }

@@ -25,32 +25,31 @@ export class BooksService {
     return this.bookModel.findOne({ _id }).exec();
   }
 
-  // async addRating(_id: string, rating: BookRating): Promise<Book | null> {
-  //   const book = await this.bookModel.findById(_id);
+  async addRating(_id: string, rating: BookRating): Promise<Book | null> {
+    const book = await this.bookModel.findById(_id);
 
-  //   const { userId, grade } = rating;
+    const { userId, grade } = rating;
 
-  //   if (!book) {
-  //     throw new NotFoundException('Book not found');
-  //   }
+    if (!book) {
+      throw new NotFoundException('Book not found');
+    }
 
-  //   // Check if the userId already exists in ratings
-  //   const existingRating = book.ratings.find((rating) => rating.userId === userId);
+    // Check if the userId already exists in ratings
+    const existingRatingIndex = book.ratings.findIndex((r) => r.userId.toString() === userId.toString());
 
-  //   if (!existingRating) {
-  //     // Update existing rating
-  //     // Add a new rating
-  //     book.ratings.push({ userId, grade });
-  //   } else {
+    if (existingRatingIndex === -1) {
+      // Add a new rating
+      book.ratings.push({ userId, grade });
+    } else {
+      // Update existing rating
+      book.ratings[existingRatingIndex].grade = grade;
+    }
 
-  //     throw new Error("The user already rated this book")
-  //   }
+    // Calculate average rating
+    const totalRatings = book.ratings.reduce((acc, cur) => acc + cur.grade, 0);
+    book.averageRating = totalRatings / book.ratings.length;
 
-  //   // Calculate average rating
-  //   const totalRatings = book.ratings.reduce((acc, cur) => acc + cur.grade, 0);
-  //   book.averageRating = totalRatings / book.ratings.length;
-
-  //   // Save the updated book
-  //   return book.save();
-  // }
+    // Save the updated book
+    return book.save();
+  }
 }

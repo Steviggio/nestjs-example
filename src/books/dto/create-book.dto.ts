@@ -7,11 +7,11 @@ export class CreateBookDto {
   imageUrl: string;
   year: number;
   genre: string;
-  ratings: { userId: string, grade: number }[];
+  ratings?: BookRating[];
   averageRating: number
 }
 
 export interface BookRating {
-  userId: ObjectId, 
+  userId: ObjectId,
   grade: number
 }
