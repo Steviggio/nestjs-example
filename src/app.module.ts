@@ -8,9 +8,10 @@ import { AuthModule } from './auth/auth.module';
 import { BooksModule } from './books/books.module';
 
 
+
 @Module({
   imports: [UsersModule,
-    AuthModule, MongooseModule.forRoot('mongodb://127.0.0.1:27017/passport'), BooksModule,
+    AuthModule, MongooseModule.forRoot('mongodb://127.0.0.1:27017/passport'), BooksModule
   ],
   controllers: [AppController],
   providers: [AppService],

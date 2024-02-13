@@ -5,7 +5,7 @@ import * as bcrypt from 'bcrypt';
 import { AuthenticatedGuard } from 'src/auth/authenticated.guard';
 
 
-@Controller('users')
+@Controller('auth')
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
 
@@ -49,7 +49,7 @@ export class UsersController {
 
   // Route users/logout
   // @UseGuards(AuthenticatedGuard)
-  @Get("/logout")
+  @Post("/logout")
   logout(@Request() req): any {
     req.session.destroy();
     return { msg: "The user session has ended." }
